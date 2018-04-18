@@ -1,0 +1,58 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" name="BlockChainAPI:war exploded">
+    <output-path>$PROJECT_DIR$/target/BlockChainAPI-0.0.1-SNAPSHOT</output-path>
+    <root id="root">
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="BlockChainAPI" />
+        </element>
+        <element id="directory" name="lib">
+          <element id="library" level="project" name="Maven: com.github.briandilley.jsonrpc4j:jsonrpc4j:1.4.6" />
+          <element id="library" level="project" name="Maven: net.iharder:base64:2.3.9" />
+          <element id="library" level="project" name="Maven: org.slf4j:slf4j-api:1.7.9" />
+          <element id="library" level="project" name="Maven: com.fasterxml.jackson.core:jackson-core:2.7.2" />
+          <element id="library" level="project" name="Maven: com.fasterxml.jackson.core:jackson-databind:2.7.2" />
+          <element id="library" level="project" name="Maven: com.fasterxml.jackson.core:jackson-annotations:2.7.2" />
+          <element id="library" level="project" name="Maven: org.web3j:core:3.3.1" />
+          <element id="library" level="project" name="Maven: org.web3j:abi:3.3.1" />
+          <element id="library" level="project" name="Maven: org.web3j:utils:3.3.1" />
+          <element id="library" level="project" name="Maven: org.bouncycastle:bcprov-jdk15on:1.54" />
+          <element id="library" level="project" name="Maven: org.web3j:crypto:3.3.1" />
+          <element id="library" level="project" name="Maven: org.web3j:rlp:3.3.1" />
+          <element id="library" level="project" name="Maven: org.web3j:tuples:3.3.1" />
+          <element id="library" level="project" name="Maven: com.github.jnr:jnr-unixsocket:0.15" />
+          <element id="library" level="project" name="Maven: com.github.jnr:jnr-ffi:2.1.2" />
+          <element id="library" level="project" name="Maven: com.github.jnr:jffi:1.2.14" />
+          <element id="library" level="project" name="Maven: com.github.jnr:jffi:native:1.2.14" />
+          <element id="library" level="project" name="Maven: org.ow2.asm:asm:5.0.3" />
+          <element id="library" level="project" name="Maven: org.ow2.asm:asm-commons:5.0.3" />
+          <element id="library" level="project" name="Maven: org.ow2.asm:asm-analysis:5.0.3" />
+          <element id="library" level="project" name="Maven: org.ow2.asm:asm-tree:5.0.3" />
+          <element id="library" level="project" name="Maven: org.ow2.asm:asm-util:5.0.3" />
+          <element id="library" level="project" name="Maven: com.github.jnr:jnr-x86asm:1.0.2" />
+          <element id="library" level="project" name="Maven: com.github.jnr:jnr-constants:0.9.6" />
+          <element id="library" level="project" name="Maven: com.github.jnr:jnr-enxio:0.14" />
+          <element id="library" level="project" name="Maven: com.github.jnr:jnr-posix:3.0.33" />
+          <element id="library" level="project" name="Maven: com.squareup.okhttp3:okhttp:3.8.1" />
+          <element id="library" level="project" name="Maven: com.squareup.okio:okio:1.13.0" />
+          <element id="library" level="project" name="Maven: com.squareup.okhttp3:logging-interceptor:3.8.1" />
+          <element id="library" level="project" name="Maven: io.reactivex:rxjava:1.2.4" />
+          <element id="library" level="project" name="Maven: org.web3j:parity:3.3.1" />
+          <element id="library" level="project" name="Maven: org.springframework:spring-context:4.1.4.RELEASE" />
+          <element id="library" level="project" name="Maven: org.springframework:spring-aop:4.1.4.RELEASE" />
+          <element id="library" level="project" name="Maven: aopalliance:aopalliance:1.0" />
+          <element id="library" level="project" name="Maven: org.springframework:spring-beans:4.1.4.RELEASE" />
+          <element id="library" level="project" name="Maven: org.springframework:spring-core:4.1.4.RELEASE" />
+          <element id="library" level="project" name="Maven: commons-logging:commons-logging:1.2" />
+          <element id="library" level="project" name="Maven: org.springframework:spring-expression:4.1.4.RELEASE" />
+          <element id="library" level="project" name="Maven: org.springframework:spring-test:4.1.4.RELEASE" />
+          <element id="library" level="project" name="Maven: org.springframework:spring-context-support:4.1.4.RELEASE" />
+        </element>
+      </element>
+      <element id="directory" name="META-INF">
+        <element id="file-copy" path="$PROJECT_DIR$/target/BlockChainAPI-0.0.1-SNAPSHOT/META-INF/MANIFEST.MF" />
+      </element>
+      <element id="javaee-facet-resources" facet="BlockChainAPI/web/Web" />
+    </root>
+  </artifact>
+</component>
