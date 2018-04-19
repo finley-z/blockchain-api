@@ -6,7 +6,7 @@ import org.web3j.protocol.parity.Parity;
 
 public class ParityBeanFactory {
 
-        public static Web3j getInstance(String url){
+        public static Parity getInstance(String url){
            return  Parity.build(new HttpService(url));
         }
 }

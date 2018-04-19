@@ -1,0 +1,173 @@
+{
+  "contractName": "BusinessContract",
+  "abi":[
+    {
+      "constant": true,
+      "inputs": [
+        {
+          "name": "signParty",
+          "type": "address"
+        }
+      ],
+      "name": "getContract",
+      "outputs": [
+        {
+          "name": "firstParty",
+          "type": "address"
+        },
+        {
+          "name": "secondParty",
+          "type": "address"
+        },
+        {
+          "name": "userId",
+          "type": "uint256"
+        },
+        {
+          "name": "shareProfit",
+          "type": "uint256"
+        },
+        {
+          "name": "expireYear",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "firstParty",
+          "type": "address"
+        },
+        {
+          "name": "secondParty",
+          "type": "address"
+        },
+        {
+          "name": "userId",
+          "type": "uint256"
+        },
+        {
+          "name": "shareProfit",
+          "type": "uint256"
+        },
+        {
+          "name": "expireYear",
+          "type": "uint256"
+        }
+      ],
+      "name": "signContract",
+      "outputs": [],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "getAdopters",
+      "outputs": [
+        {
+          "name": "",
+          "type": "address[]"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [
+        {
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "name": "adopters",
+      "outputs": [
+        {
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "getSender",
+      "outputs": [
+        {
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [
+        {
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "name": "contents",
+      "outputs": [
+        {
+          "name": "firstParty",
+          "type": "address"
+        },
+        {
+          "name": "secondParty",
+          "type": "address"
+        },
+        {
+          "name": "userId",
+          "type": "uint256"
+        },
+        {
+          "name": "shareProfit",
+          "type": "uint256"
+        },
+        {
+          "name": "expireYear",
+          "type": "uint256"
+        },
+        {
+          "name": "txHash",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "name": "firstParty",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "name": "secondParty",
+          "type": "address"
+        }
+      ],
+      "name": "Save",
+      "type": "event"
+    }
+  ]
+}

@@ -66,5 +66,6 @@
     <orderEntry type="library" name="Maven: org.springframework:spring-expression:4.1.4.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.springframework:spring-test:4.1.4.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.springframework:spring-context-support:4.1.4.RELEASE" level="project" />
+    <orderEntry type="library" name="Maven: org.ethereum:geth:1.6.7" level="project" />
   </component>
 </module>

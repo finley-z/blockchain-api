@@ -47,6 +47,7 @@
           <element id="library" level="project" name="Maven: org.springframework:spring-expression:4.1.4.RELEASE" />
           <element id="library" level="project" name="Maven: org.springframework:spring-test:4.1.4.RELEASE" />
           <element id="library" level="project" name="Maven: org.springframework:spring-context-support:4.1.4.RELEASE" />
+          <element id="library" level="project" name="Maven: org.ethereum:geth:1.6.7" />
         </element>
       </element>
       <element id="directory" name="META-INF">

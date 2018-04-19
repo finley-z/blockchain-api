@@ -77,7 +77,11 @@
             <artifactId>spring-context-support</artifactId>
             <version>${spring.version}</version>
         </dependency>
-
+        <dependency>
+            <groupId>org.ethereum</groupId>
+            <artifactId>geth</artifactId>
+            <version>1.6.7</version>
+        </dependency>
     </dependencies>
 
 </project>

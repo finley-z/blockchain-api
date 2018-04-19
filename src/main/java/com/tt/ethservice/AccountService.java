@@ -7,13 +7,17 @@ import org.web3j.protocol.Web3j;
 import org.web3j.protocol.admin.Admin;
 import org.web3j.protocol.admin.methods.response.NewAccountIdentifier;
 import org.web3j.protocol.admin.methods.response.PersonalUnlockAccount;
+import org.web3j.protocol.core.DefaultBlockParameter;
+import org.web3j.protocol.core.DefaultBlockParameterNumber;
 import org.web3j.protocol.core.Request;
+import org.web3j.protocol.core.methods.response.EthGetBalance;
 import org.web3j.protocol.http.HttpService;
 import org.web3j.protocol.parity.Parity;
 
 import java.io.IOException;
 import java.math.BigInteger;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class AccountService {
@@ -23,26 +27,13 @@ public class AccountService {
     @Autowired
     private  Parity parity;
 
-
-    public List<String> getAccountList(){
-        try{
-            return  parity.personalListAccounts().send().getAccountIds();
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-        return null;
-    }
-
-
-    public String createNewAccount(String accountName,String password){
+    public String createNewAccount(String accountName,String password,Map<String,Object> metaInfo){
         try {
             NewAccountIdentifier newAccountIdentifier = parity.personalNewAccount(password).send();
             if(newAccountIdentifier!=null){
                 String address = newAccountIdentifier.getAccountId();
-//                parity.per(address,accountName);
-//                Map<String,Object> account = new HashMap<String,Object>();
-//                account.put(address,accountInfo);
-//                parity.personalSetAccountMeta(address,account);
+                parity.paritySetAccountName(address,accountName);
+                parity.paritySetAccountMeta(address,metaInfo);
                 return  address;
             }
         } catch (Exception e) {
@@ -64,6 +55,29 @@ public class AccountService {
             e.printStackTrace();
             return false;
         }
+    }
+
+    public List<String> getAccountList(){
+        try{
+            return  parity.personalListAccounts().send().getAccountIds();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public BigInteger getBalance(String address){
+        try {
+            DefaultBlockParameter defaultBlockParameter = new DefaultBlockParameterNumber(web3j.ethBlockNumber().getId());
+//            DefaultBlockParameter defaultBlockParameter = new DefaultBlockParameterNumber(1748);
+            EthGetBalance ethGetBalance =  parity.ethGetBalance(address,defaultBlockParameter).send();
+            if(ethGetBalance!=null){
+                return ethGetBalance.getBalance();
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return null;
     }
 
 }
