@@ -2,14 +2,152 @@
   "contractName": "BusinessContract",
   "abi":[
     {
-      "constant": true,
+      "constant": false,
       "inputs": [
         {
-          "name": "signParty",
+          "name": "secondParty",
           "type": "address"
         }
       ],
+      "name": "getContracts",
+      "outputs": [
+        {
+          "name": "firstParty",
+          "type": "address"
+        },
+        {
+          "name": "secondParty1",
+          "type": "address"
+        },
+        {
+          "name": "userId",
+          "type": "uint256"
+        },
+        {
+          "name": "shareProfit",
+          "type": "uint256"
+        },
+        {
+          "name": "expireYear",
+          "type": "uint256"
+        },
+        {
+          "name": "timestamp",
+          "type": "uint256"
+        },
+        {
+          "name": "remark",
+          "type": "string"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "from",
+          "type": "address"
+        },
+        {
+          "name": "to",
+          "type": "address"
+        },
+        {
+          "name": "amount",
+          "type": "uint256"
+        },
+        {
+          "name": "timestamp",
+          "type": "uint256"
+        },
+        {
+          "name": "remark",
+          "type": "string"
+        }
+      ],
+      "name": "takerecord",
+      "outputs": [],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [
+        {
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "name": "accounts",
+      "outputs": [
+        {
+          "name": "userAddress",
+          "type": "address"
+        },
+        {
+          "name": "userId",
+          "type": "uint256"
+        },
+        {
+          "name": "balance",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [],
       "name": "getContract",
+      "outputs": [
+        {
+          "name": "firstParty",
+          "type": "address"
+        },
+        {
+          "name": "secondParty1",
+          "type": "address"
+        },
+        {
+          "name": "userId",
+          "type": "uint256"
+        },
+        {
+          "name": "shareProfit",
+          "type": "uint256"
+        },
+        {
+          "name": "expireYear",
+          "type": "uint256"
+        },
+        {
+          "name": "timestamp",
+          "type": "uint256"
+        },
+        {
+          "name": "remark",
+          "type": "string"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [
+        {
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "name": "cos",
       "outputs": [
         {
           "name": "firstParty",
@@ -30,6 +168,53 @@
         {
           "name": "expireYear",
           "type": "uint256"
+        },
+        {
+          "name": "txHash",
+          "type": "uint256"
+        },
+        {
+          "name": "timestamp",
+          "type": "uint256"
+        },
+        {
+          "name": "remark",
+          "type": "string"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [
+        {
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "name": "transactions",
+      "outputs": [
+        {
+          "name": "from",
+          "type": "address"
+        },
+        {
+          "name": "to",
+          "type": "address"
+        },
+        {
+          "name": "amount",
+          "type": "uint256"
+        },
+        {
+          "name": "timestamp",
+          "type": "uint256"
+        },
+        {
+          "name": "remark",
+          "type": "string"
         }
       ],
       "payable": false,
@@ -40,27 +225,19 @@
       "constant": false,
       "inputs": [
         {
-          "name": "firstParty",
+          "name": "to",
           "type": "address"
         },
         {
-          "name": "secondParty",
-          "type": "address"
-        },
-        {
-          "name": "userId",
+          "name": "amount",
           "type": "uint256"
         },
         {
-          "name": "shareProfit",
-          "type": "uint256"
-        },
-        {
-          "name": "expireYear",
-          "type": "uint256"
+          "name": "remark",
+          "type": "string"
         }
       ],
-      "name": "signContract",
+      "name": "transform",
       "outputs": [],
       "payable": false,
       "stateMutability": "nonpayable",
@@ -68,54 +245,11 @@
     },
     {
       "constant": true,
-      "inputs": [],
-      "name": "getAdopters",
-      "outputs": [
-        {
-          "name": "",
-          "type": "address[]"
-        }
-      ],
-      "payable": false,
-      "stateMutability": "view",
-      "type": "function"
-    },
-    {
-      "constant": true,
       "inputs": [
         {
           "name": "",
-          "type": "uint256"
-        }
-      ],
-      "name": "adopters",
-      "outputs": [
-        {
-          "name": "",
           "type": "address"
-        }
-      ],
-      "payable": false,
-      "stateMutability": "view",
-      "type": "function"
-    },
-    {
-      "constant": true,
-      "inputs": [],
-      "name": "getSender",
-      "outputs": [
-        {
-          "name": "",
-          "type": "address"
-        }
-      ],
-      "payable": false,
-      "stateMutability": "view",
-      "type": "function"
-    },
-    {
-      "constant": true,
-      "inputs": [
+        },
         {
           "name": "",
           "type": "address"
@@ -146,10 +280,52 @@
         {
           "name": "txHash",
           "type": "uint256"
+        },
+        {
+          "name": "timestamp",
+          "type": "uint256"
+        },
+        {
+          "name": "remark",
+          "type": "string"
         }
       ],
       "payable": false,
       "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "firstParty",
+          "type": "address"
+        },
+        {
+          "name": "secondParty",
+          "type": "address"
+        },
+        {
+          "name": "userId",
+          "type": "uint256"
+        },
+        {
+          "name": "shareProfit",
+          "type": "uint256"
+        },
+        {
+          "name": "expireYear",
+          "type": "uint256"
+        },
+        {
+          "name": "remark",
+          "type": "string"
+        }
+      ],
+      "name": "signContract",
+      "outputs": [],
+      "payable": false,
+      "stateMutability": "nonpayable",
       "type": "function"
     },
     {

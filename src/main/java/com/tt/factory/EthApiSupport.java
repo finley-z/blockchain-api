@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Random;
 
 @Service
-public class ApiSupport {
+public class EthApiSupport {
     @Autowired(required = false)
     private List<Web3j> web3j;
 

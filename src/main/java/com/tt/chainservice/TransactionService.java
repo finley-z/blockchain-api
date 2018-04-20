@@ -1,4 +1,4 @@
-package com.tt.ethservice;
+package com.tt.chainservice;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

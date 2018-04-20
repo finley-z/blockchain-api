@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+
+<script type="text/javascript" src="http://code.jquery.com/jquery-2.2.4.min.js"  integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="  crossorigin="anonymous"></script>
+
+<script type="text/javascript" >
+    $(function () {
+//        $.ajax({
+//            url: "http://localhost:8090/account/register",
+//            type: "post",
+//            async: false,
+//            data:{"accountName":"zyf","password":"529186"},
+//            success: function (data) {
+//                console.info(data);
+//            }
+//        })
+//        $.ajax({
+//            url: "http://localhost:8090/account/login",
+//            type: "post",
+//            async: false,
+//                    data:{"address":"0xdb9ab489ed6b547121dc179c901d0f83d21e3692","password":"123456"},
+//            success: function (data) {
+//                console.info(data);
+//            }
+//        })
+        $.ajax({
+            url: "http://localhost:8090/contract/get_contract",
+            type: "post",
+            async: false,
+            data:{"address":"0xdb9ab489ed6b547121dc179c901d0f83d21e3692","password":"123456","secondParty":"0x38f67949eeb18ed1a5cf01b4e2f0296afd4e956c"},
+            success: function (data) {
+                console.info(data);
+            }
+        })
+    })
+</script>
+</body>
+</html>

@@ -1,4 +1,4 @@
-package com.tt.ethservice;
+package com.tt.chainservice;
 
 public class AdminService {
 }

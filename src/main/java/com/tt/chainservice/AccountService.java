@@ -1,4 +1,4 @@
-package com.tt.ethservice;
+package com.tt.chainservice;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,10 +9,10 @@ import org.web3j.protocol.admin.methods.response.NewAccountIdentifier;
 import org.web3j.protocol.admin.methods.response.PersonalUnlockAccount;
 import org.web3j.protocol.core.DefaultBlockParameter;
 import org.web3j.protocol.core.DefaultBlockParameterNumber;
-import org.web3j.protocol.core.Request;
 import org.web3j.protocol.core.methods.response.EthGetBalance;
 import org.web3j.protocol.http.HttpService;
 import org.web3j.protocol.parity.Parity;
+import org.web3j.protocol.parity.methods.response.ParityAllAccountsInfo;
 
 import java.io.IOException;
 import java.math.BigInteger;
@@ -27,6 +27,7 @@ public class AccountService {
     @Autowired
     private  Parity parity;
 
+    //创建账户
     public String createNewAccount(String accountName,String password,Map<String,Object> metaInfo){
         try {
             NewAccountIdentifier newAccountIdentifier = parity.personalNewAccount(password).send();
@@ -42,10 +43,10 @@ public class AccountService {
         return null;
     }
 
+    //解锁账户
     public boolean unlockAccount(String address, String password){
-        Admin web3j = Admin.build(new HttpService());
         try {
-            PersonalUnlockAccount personalUnlockAccount= web3j.personalUnlockAccount(address,password).send();
+            PersonalUnlockAccount personalUnlockAccount= parity.personalUnlockAccount(address,password).send();
             if(personalUnlockAccount.accountUnlocked()){
                 return true;
             }else{
@@ -57,6 +58,7 @@ public class AccountService {
         }
     }
 
+    //获取账户列表
     public List<String> getAccountList(){
         try{
             return  parity.personalListAccounts().send().getAccountIds();
@@ -66,6 +68,18 @@ public class AccountService {
         return null;
     }
 
+    //获取账户详细信息
+    public ParityAllAccountsInfo.AccountsInfo getAccountInfo(String address){
+        try{
+            ParityAllAccountsInfo parityAllAccountsInfo=parity.parityAllAccountsInfo().send();
+            return  parityAllAccountsInfo.getAccountsInfo().get(address);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    //获取账户在区块链中的余额
     public BigInteger getBalance(String address){
         try {
             DefaultBlockParameter defaultBlockParameter = new DefaultBlockParameterNumber(web3j.ethBlockNumber().getId());

@@ -1,11 +1,10 @@
-package com.tt.ethservice;
+package com.tt.chainservice;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.web3j.abi.FunctionEncoder;
 import org.web3j.abi.FunctionReturnDecoder;
-import org.web3j.abi.TypeReference;
 import org.web3j.abi.datatypes.Function;
 import org.web3j.abi.datatypes.Type;
 import org.web3j.protocol.Web3j;
@@ -14,8 +13,6 @@ import org.web3j.protocol.core.methods.request.Transaction;
 import org.web3j.protocol.parity.Parity;
 import org.web3j.utils.Collection;
 
-import java.math.BigInteger;
-import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
