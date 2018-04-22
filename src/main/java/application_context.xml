@@ -17,7 +17,15 @@
   <!-- 扫描指定package下所有带有如@services,@resource-->
   <context:component-scan base-package="com.tt"/>
 
-
+  <!-- 初始化数据 -->
+  <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+    <property name="locations">
+      <list>
+        <value>classpath:config/config.properties</value>
+      </list>
+    </property>
+    <property name="ignoreUnresolvablePlaceholders" value="true"/>
+  </bean>
   <!-- 配置Web3实例 -->
   <bean id="web3j" class="com.tt.factory.Web3BeanFactory" factory-method="getInstance">
       <constructor-arg value="http://127.0.0.1:8545/"></constructor-arg>
