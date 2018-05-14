@@ -60,11 +60,61 @@
       "outputs": [
         {
           "name": "",
-          "type": "uint64[2][]"
+          "type": "uint160[4][]"
         }
       ],
       "payable": false,
       "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [
+        {
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "name": "tnounces",
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint64"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "to",
+          "type": "address"
+        },
+        {
+          "name": "amount",
+          "type": "uint64"
+        },
+        {
+          "name": "remark",
+          "type": "string"
+        }
+      ],
+      "name": "addFund",
+      "outputs": [
+        {
+          "name": "touser",
+          "type": "address"
+        },
+        {
+          "name": "balance",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "nonpayable",
       "type": "function"
     },
     {
@@ -78,7 +128,7 @@
         },
         {
           "name": "balance",
-          "type": "uint16"
+          "type": "uint64"
         }
       ],
       "payable": false,
@@ -86,19 +136,34 @@
       "type": "function"
     },
     {
-      "constant": false,
+      "constant": true,
       "inputs": [
         {
-          "name": "from",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "name": "contracts",
+      "outputs": [
+        {
+          "name": "firstParty",
           "type": "address"
         },
         {
-          "name": "to",
+          "name": "secondParty",
           "type": "address"
         },
         {
-          "name": "amount",
-          "type": "uint16"
+          "name": "shareProfit",
+          "type": "uint8"
+        },
+        {
+          "name": "expireYear",
+          "type": "uint8"
+        },
+        {
+          "name": "txHash",
+          "type": "uint64"
         },
         {
           "name": "timestamp",
@@ -109,10 +174,8 @@
           "type": "string"
         }
       ],
-      "name": "takerecord",
-      "outputs": [],
       "payable": false,
-      "stateMutability": "nonpayable",
+      "stateMutability": "view",
       "type": "function"
     },
     {
@@ -161,11 +224,41 @@
         },
         {
           "name": "balance",
-          "type": "uint16"
+          "type": "uint64"
         }
       ],
       "payable": false,
       "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "from",
+          "type": "address"
+        },
+        {
+          "name": "to",
+          "type": "address"
+        },
+        {
+          "name": "amount",
+          "type": "uint64"
+        },
+        {
+          "name": "timestamp",
+          "type": "uint64"
+        },
+        {
+          "name": "remark",
+          "type": "string"
+        }
+      ],
+      "name": "takerecord",
+      "outputs": [],
+      "payable": false,
+      "stateMutability": "nonpayable",
       "type": "function"
     },
     {
@@ -188,7 +281,7 @@
         },
         {
           "name": "amount",
-          "type": "uint16"
+          "type": "uint64"
         },
         {
           "name": "timestamp",
@@ -204,6 +297,39 @@
       "type": "function"
     },
     {
+      "constant": true,
+      "inputs": [],
+      "name": "getContracts",
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint160[6][]"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [
+        {
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "name": "cnounces",
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint64"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
       "constant": false,
       "inputs": [
         {
@@ -212,7 +338,7 @@
         },
         {
           "name": "amount",
-          "type": "uint16"
+          "type": "uint64"
         },
         {
           "name": "remark",
@@ -228,74 +354,14 @@
     {
       "constant": true,
       "inputs": [],
-      "name": "getContracts",
-      "outputs": [
-        {
-          "name": "",
-          "type": "uint64[4][]"
-        }
-      ],
-      "payable": false,
-      "stateMutability": "view",
-      "type": "function"
-    },
-    {
-      "constant": false,
-      "inputs": [
-        {
-          "name": "to",
-          "type": "address"
-        },
-        {
-          "name": "amount",
-          "type": "uint16"
-        },
-        {
-          "name": "remark",
-          "type": "string"
-        }
-      ],
-      "name": "addFund",
-      "outputs": [
-        {
-          "name": "touser",
-          "type": "address"
-        },
-        {
-          "name": "balance",
-          "type": "uint256"
-        }
-      ],
-      "payable": false,
-      "stateMutability": "nonpayable",
-      "type": "function"
-    },
-    {
-      "constant": true,
-      "inputs": [],
       "name": "test",
       "outputs": [
         {
           "name": "val",
-          "type": "uint160"
-        }
-      ],
-      "payable": false,
-      "stateMutability": "view",
-      "type": "function"
-    },
-    {
-      "constant": true,
-      "inputs": [
-        {
-          "name": "",
           "type": "address"
-        }
-      ],
-      "name": "nounces",
-      "outputs": [
+        },
         {
-          "name": "",
+          "name": "t",
           "type": "uint64"
         }
       ],
