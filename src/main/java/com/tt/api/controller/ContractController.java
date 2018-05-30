@@ -1,7 +1,7 @@
 package com.tt.api.controller;
 
 import com.tt.api.entity.ContractContent;
-import com.tt.contract.TTVIP;
+import com.tt.contract.BusinessContract;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -35,10 +35,10 @@ public class ContractController {
 
     @ResponseBody
     @RequestMapping(value = "sign_contract")
-    public String sign_contract(ContractContent con, @RequestParam(required = true) String address, @RequestParam(required = true) String password) {
+    public String sign_contract(ContractContent con, @RequestParam(required = true) String address, @RequestParam(required = true)String password) {
         try {
-            TTVIP contract = loadContract(address, password);
-            TransactionReceipt receipt = contract.signContract(con.getSecondParty(), new BigInteger(con.getShareProfit().toString()), new BigInteger(con.getExpireYear().toString()), con.getRemark()).send();
+            BusinessContract contract=loadContract(address,password);
+           TransactionReceipt receipt= contract.signContract(con.getFirstParty(),con.getSecondParty(),new BigInteger(con.getUserId().toString()),new BigInteger(con.getShareProfit().toString()),new BigInteger(con.getExpireYear().toString()),con.getRemark()).send();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -47,17 +47,18 @@ public class ContractController {
 
     @ResponseBody
     @RequestMapping(value = "get_contract")
-    public String get_contract(String address, String password, String secondParty) {
+    public String get_contract(String address, String password,String secondParty) {
         try {
-            TTVIP contract = loadContract(address, password);
-            contract.getContracts().send();
+            BusinessContract contract=loadContract(address,password);
+           contract.getContracts(secondParty).send();
+//            receipt.get
         } catch (Exception e) {
             e.printStackTrace();
         }
         return null;
     }
 
-    public TTVIP loadContract(String address, String password) throws Exception {
+    public BusinessContract loadContract(String address, String password) throws Exception {
         File file = new File(keystoreDir);
         String[] keyNames = file.list();
         address = address.replace("0x", "");
@@ -72,7 +73,7 @@ public class ContractController {
 
         if (keyFile != null) {
             Credentials credentials = WalletUtils.loadCredentials(password, keystoreDir + keyFile);
-            return TTVIP.load(contractAddress, web3j, credentials, null, null);
+            return BusinessContract.load(contractAddress, web3j, credentials, null, null);
         }
         return null;
     }
