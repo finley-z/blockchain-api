@@ -1,4 +1,3 @@
-package com.tt.contract;
 
 import java.math.BigInteger;
 import java.util.ArrayList;
@@ -56,7 +55,7 @@ public class TTVIP extends Contract {
 
     static {
         _addresses = new HashMap<>();
-        _addresses.put("666", "0xb18d6b47de63d1e07750f845ad7c814263f3ef0d");
+        _addresses.put("666", "0xb0b2592363885ed0d239cc040f072140375a38b7");
     }
 
     protected TTVIP(String contractAddress, Web3j web3j, Credentials credentials, BigInteger gasPrice, BigInteger gasLimit) {
