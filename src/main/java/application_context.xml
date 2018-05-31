@@ -22,18 +22,59 @@
     <property name="locations">
       <list>
         <value>classpath:config/config.properties</value>
+        <value>classpath:config/redis.properties</value>
       </list>
     </property>
     <property name="ignoreUnresolvablePlaceholders" value="true"/>
   </bean>
   <!-- 配置Web3实例 -->
   <bean id="web3j" class="com.tt.factory.Web3BeanFactory" factory-method="getInstance">
-      <constructor-arg value="http://127.0.0.1:8545/"></constructor-arg>
+    <constructor-arg value="http://192.168.1.77:8545"></constructor-arg>
   </bean>
 
   <!-- 配置Parity实例 -->
   <bean id="parity" class="com.tt.factory.ParityBeanFactory" factory-method="getInstance">
-    <constructor-arg value="http://127.0.0.1:8545/"></constructor-arg>
+    <constructor-arg value="http://192.168.1.77:8545"></constructor-arg>
   </bean>
 
+
+  <!--reids配置-->
+  <bean id="jedisPoolConfig" class="redis.clients.jedis.JedisPoolConfig">
+    <property name="maxIdle" value="${redis.maxIdle}"></property>
+    <property name="minIdle" value="${redis.minIdle}"></property>
+    <property name="minEvictableIdleTimeMillis" value="${redis.minEvictableIdleTimeMillis}"></property>
+    <property name="numTestsPerEvictionRun" value="${redis.numTestsPerEvictionRun}"></property>
+    <property name="timeBetweenEvictionRunsMillis" value="${redis.timeBetweenEvictionRunsMillis}"></property>
+    <property name="testOnBorrow" value="${redis.testOnBorrow}"></property>
+    <property name="testOnReturn" value="${redis.testOnReturn}"></property>
+    <property name="testWhileIdle" value="${redis.testWhileIdle}"></property>
+  </bean>
+  <bean id="redisConnectionFactory" class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory" destroy-method="destroy">
+    <property name="hostName" value="${redis.host}"/>
+    <property name="port" value="${redis.port}"/>
+    <property name="password" value="${redis.password}"/>
+    <property name="timeout" value="${redis.timeout}"/>
+    <property name="database" value="0"/>
+    <property name="usePool" value="true"/>
+    <property name="poolConfig" ref="jedisPoolConfig"/>
+  </bean>
+
+  <!--JDK序列化工具-->
+  <bean id="jdkSerializationRedisSerializer" class="org.springframework.data.redis.serializer.JdkSerializationRedisSerializer" />
+  <!--文本序列化工具-->
+  <bean id="stringRedisSerializer" class="org.springframework.data.redis.serializer.StringRedisSerializer" />
+
+  <!--redis 工具类-->
+  <bean id="redisTemplate" class="org.springframework.data.redis.core.RedisTemplate">
+    <property name="connectionFactory" ref="redisConnectionFactory"/>
+    <property name="keySerializer" ref="stringRedisSerializer"/>
+    <property name="hashKeySerializer" ref="stringRedisSerializer"/>
+    <property name="valueSerializer" ref="stringRedisSerializer"/>
+    <property name="hashValueSerializer" ref="stringRedisSerializer"/>
+  </bean>
+
+  <!--自定义redis工具类,在需要缓存的地方注入此类  -->
+  <bean id="redisUtil" class="com.tt.util.RedisUtil">
+    <property name="redisTemplate" ref="redisTemplate" />
+  </bean>
 </beans>

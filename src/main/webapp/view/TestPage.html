@@ -30,14 +30,15 @@
 //            }
 //        })
         $.ajax({
-            url: "http://localhost:8090/contract/get_contract",
+            url: "http://192.168.1.57:8080/transaction/add_fund",
             type: "post",
             async: false,
-            data:{"address":"0xdb9ab489ed6b547121dc179c901d0f83d21e3692","password":"123456","secondParty":"0x38f67949eeb18ed1a5cf01b4e2f0296afd4e956c"},
+            data:{"to":"0x38f67949eEB18Ed1A5CF01B4E2f0296afD4e956C","amount":10000,"remark":"test add1","address":"0xdb9ab489ed6b547121dc179c901d0f83d21e3692","password":"123456"},
             success: function (data) {
                 console.info(data);
             }
         })
+
     })
 </script>
 </body>

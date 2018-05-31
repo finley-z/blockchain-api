@@ -1,80 +1,78 @@
 package com.tt.api.controller;
 
-import com.tt.api.entity.ContractContent;
-import com.tt.contract.BusinessContract;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
+import com.tt.api.entity.ResultVo;
+import com.tt.contract.TTVIP;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.web3j.crypto.Credentials;
-import org.web3j.crypto.WalletUtils;
-import org.web3j.protocol.Web3j;
+import org.springframework.web.bind.annotation.*;
 import org.web3j.protocol.core.methods.response.TransactionReceipt;
-import org.web3j.protocol.parity.Parity;
 
-import java.io.File;
 import java.math.BigInteger;
+import java.util.UUID;
 
+
+//@CrossOrigin(origins = "http://localhost:3000", maxAge = 3600)
 @Controller
 @RequestMapping(value = "/contract")
-public class ContractController {
-    @Autowired
-    private Web3j web3j;
+public class ContractController  extends BaseController{
 
-    @Autowired
-    private Parity parity;
-
-
-    @Value("${app.contractAddress}")
-    private String contractAddress;
-
-    @Value("${app.keystore.dir}")
-    private String keystoreDir;
 
     @ResponseBody
     @RequestMapping(value = "sign_contract")
-    public String sign_contract(ContractContent con, @RequestParam(required = true) String address, @RequestParam(required = true)String password) {
+    public ResultVo sign_contract(@RequestBody String json) {
+        ResultVo resultVo=new ResultVo(true);
         try {
-            BusinessContract contract=loadContract(address,password);
-           TransactionReceipt receipt= contract.signContract(con.getFirstParty(),con.getSecondParty(),new BigInteger(con.getUserId().toString()),new BigInteger(con.getShareProfit().toString()),new BigInteger(con.getExpireYear().toString()),con.getRemark()).send();
+            if(json==null||json.length()<1){
+               return null;
+            }
+            JSONObject param= JSON.parseObject(json);
+            String secondParty=param.getString("secondParty");
+            String contractType=param.getString("contractType");
+            String contractName=param.getString("contractName");
+            String contractContent=param.getString("contractContent");
+            String remark=param.getString("remark");
+            String address=param.getString("address");
+            String password=param.getString("password");
+//            String txHash=redisUtil.incr("contract_id",1)+"";
+            TTVIP contract = loadContract(address, password);
+            TransactionReceipt receipt = contract.signContract(secondParty, new BigInteger(contractType),contractName, contractContent,remark).send();
+            if(receipt==null){
+                resultVo.setStatus(false);
+            }
+            resultVo.setData(receipt);
         } catch (Exception e) {
+            resultVo.setStatus(false);
             e.printStackTrace();
         }
-        return null;
+        return resultVo;
     }
 
     @ResponseBody
-    @RequestMapping(value = "get_contract")
-    public String get_contract(String address, String password,String secondParty) {
+    @RequestMapping(value = "confirm_contract")
+    public ResultVo confirm_contract(@RequestBody String json) {
+        ResultVo resultVo=new ResultVo(true);
         try {
-            BusinessContract contract=loadContract(address,password);
-           contract.getContracts(secondParty).send();
-//            receipt.get
+            if(json==null||json.length()<1){
+                return null;
+            }
+            JSONObject param= JSON.parseObject(json);
+            String txHash=param.getString("txHash");
+            String state=param.getString("state");
+            String address=param.getString("address");
+            String password=param.getString("password");
+            TTVIP contract = loadContract(address, password);
+            TransactionReceipt receipt = contract.confirmContract(new BigInteger(txHash), new BigInteger(state)).send();
+            if(receipt==null){
+                resultVo.setStatus(false);
+            }
+            resultVo.setData(receipt);
         } catch (Exception e) {
+            resultVo.setStatus(false);
             e.printStackTrace();
         }
-        return null;
+        return resultVo;
     }
 
-    public BusinessContract loadContract(String address, String password) throws Exception {
-        File file = new File(keystoreDir);
-        String[] keyNames = file.list();
-        address = address.replace("0x", "");
-        String keyFile = null;
-        for (int i = 0; keyNames != null && i < keyNames.length; i++) {
-            if (keyNames[i].indexOf(address) != -1) {
-                System.out.println(keyNames[i]);
-                keyFile = keyNames[i];
-                break;
-            }
-        }
 
-        if (keyFile != null) {
-            Credentials credentials = WalletUtils.loadCredentials(password, keystoreDir + keyFile);
-            return BusinessContract.load(contractAddress, web3j, credentials, null, null);
-        }
-        return null;
-    }
 }

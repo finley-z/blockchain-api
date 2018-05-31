@@ -29,6 +29,7 @@
 		<property name="locations">
 			<list>
 				<value>classpath:config/config.properties</value>
+				<value>classpath:config/redis.properties</value>
 			</list>
 		</property>
 		<property name="ignoreUnresolvablePlaceholders" value="true"/>

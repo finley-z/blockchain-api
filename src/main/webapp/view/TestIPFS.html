@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <title>Title</title>
+    <script src="https://unpkg.com/ipfs-api/dist/index.js"></script>
+
+
+    <script type="text/javascript">
+        var ipfs = window.IpfsApi('127.0.0.1', '5001');
+
+        window.onload=function(){
+
+
+
+
+        }
+
+        function add(){
+
+            var debug = {hello: "world"};
+            var blob = new Blob([JSON.stringify(debug, null, 2)],
+                {type : 'application/json'});
+
+//            var blob=document.getElementById("ipfs").value;
+            console.info("blob:"+blob);
+//
+//            var docBuffer=Buffer.from(blob,'utf-8');
+//            console.info("docBuffer:"+docBuffer);
+            const files = [
+                {
+                    path: '/tmp/myfile.txt',
+                    content:blob
+                }
+              ]
+
+            ipfs.files.add(files, function (err, files) {
+                console.info("err:"+err);
+                console.info("files:"+files);
+                // 'files' will be an array of objects containing paths and the multihashes of the files added
+            })
+        }
+
+
+        function cat(){
+            var ipfsPath="QmVtb1khyVfmtZZRnZt7ss3LkZwZw6uLQHu4Ftithwem1Q";
+            ipfs.files.cat(ipfsPath, function (err, file) {
+                if (err) {
+                    throw err
+                }
+
+                console.log(file.toString('utf8'))
+            })
+        }
+    </script>
+</head>
+<body>
+<input type="file"  id="ipfs"/>
+
+<button  onclick="add()">add</button>
+<button  onclick="cat()">tecatst</button>
+</body>
+</html>
