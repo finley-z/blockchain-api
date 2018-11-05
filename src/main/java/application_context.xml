@@ -27,15 +27,7 @@
     </property>
     <property name="ignoreUnresolvablePlaceholders" value="true"/>
   </bean>
-  <!-- 配置Web3实例 -->
-  <bean id="web3j" class="com.tt.factory.Web3BeanFactory" factory-method="getInstance">
-    <constructor-arg value="http://192.168.1.77:8545"></constructor-arg>
-  </bean>
 
-  <!-- 配置Parity实例 -->
-  <bean id="parity" class="com.tt.factory.ParityBeanFactory" factory-method="getInstance">
-    <constructor-arg value="http://192.168.1.77:8545"></constructor-arg>
-  </bean>
 
 
   <!--reids配置-->
@@ -49,6 +41,7 @@
     <property name="testOnReturn" value="${redis.testOnReturn}"></property>
     <property name="testWhileIdle" value="${redis.testWhileIdle}"></property>
   </bean>
+
   <bean id="redisConnectionFactory" class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory" destroy-method="destroy">
     <property name="hostName" value="${redis.host}"/>
     <property name="port" value="${redis.port}"/>

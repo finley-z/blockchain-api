@@ -145,6 +145,34 @@ public class AccountService {
         return false;
     }
 
+    public String sendData(String ownAddress ,String toAddress,String data ){
+        try {
+            Credentials credentials =loadCredentialsFromFile(ownAddress,accountPwd);
+            BigInteger GAS_PRICE = BigInteger.valueOf(1L);
+            BigInteger GAS_LIMIT = BigInteger.valueOf(4600000);
+
+            EthGetTransactionCount ethGetTransactionCount = web3j.ethGetTransactionCount(ownAddress, DefaultBlockParameterName.LATEST).sendAsync().get();
+            BigInteger nonce = ethGetTransactionCount.getTransactionCount();
+
+            //创建交易，这里是转0.5个以太币
+            BigInteger value = Convert.toWei("5", Convert.Unit.ETHER).toBigInteger();
+            RawTransaction rawTransaction = RawTransaction.createTransaction(nonce, GAS_PRICE, GAS_LIMIT, toAddress, data);
+
+            //签名Transaction，这里要对交易做签名
+            byte[] signedMessage = TransactionEncoder.signMessage(rawTransaction, credentials);
+            String hexValue = Numeric.toHexString(signedMessage);
+
+            //发送交易
+            EthSendTransaction ethSendTransaction =web3j.ethSendRawTransaction(hexValue).sendAsync().get();
+            String transactionHash = ethSendTransaction.getTransactionHash();
+            return transactionHash;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+
     public Credentials loadCredentialsFromFile(String address, String password) throws Exception {
         File file = new File(keystoreDir);
         String[] keyNames = file.list();

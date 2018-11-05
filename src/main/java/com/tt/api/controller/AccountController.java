@@ -58,6 +58,33 @@ public class AccountController extends  BaseController{
     }
 
     @ResponseBody
+    @RequestMapping(value = "sendData")
+    public ResultVo sendData(@RequestBody String json) {
+        ResultVo resultVo=new ResultVo();
+        if(json==null||json.length()<1){
+            resultVo.setStatus(false);
+            resultVo.setErrorMsg("参数格式不正确");
+        }
+        JSONObject param= JSON.parseObject(json);
+
+        String to=param.getString("to");
+        String data=param.getString("data");
+
+        try{
+            String receipt=accountService.sendData(mainAccount,to,data);
+            resultVo.setData(receipt);
+            resultVo.setStatus(!StringUtils.isEmpty(receipt));
+            resultVo.setData(receipt);
+        }catch (Exception e){
+            resultVo.setStatus(false);
+            resultVo.setErrorMsg(e.getMessage());
+            e.printStackTrace();
+        }
+        return resultVo;
+    }
+
+
+    @ResponseBody
     @RequestMapping(value = "login")
     public ResultVo login(@RequestBody String json) {
         ResultVo resultVo=new ResultVo();
